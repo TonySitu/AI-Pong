@@ -16,8 +16,8 @@ class Ball:
     RADIUS = 7
 
     def __init__(self, x, y):
-        self.x = original_x = x
-        self.y = original_y = y
+        self.x = self.original_x = x
+        self.y = self.original_y = y
 
         angle = _get_random_angle(-30, 30, [0])
         position = 1 if random.random() < 0.5 else -1
@@ -32,4 +32,10 @@ class Ball:
         self.x += self.x_vel
         self.y += self.y_vel
 
+    def reset(self):
+        self.x = self.original_x
+        self.y = self.original_y
 
+        angle = _get_random_angle(-30, 30, [0])
+        self.y_vel = self.MAX_VEL * math.sin(angle)
+        self.x_vel *= -1
