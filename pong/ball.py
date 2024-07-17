@@ -24,3 +24,12 @@ class Ball:
 
         self.x_vel = position * abs(math.cos(angle) * self.MAX_VEL)
         self.y_vel = position * abs(math.sin(angle) * self.MAX_VEL)
+
+    def draw(self, window):
+        pygame.draw.circle(window, (255, 255, 255), (self.x, self.y), self.RADIUS)
+
+    def move(self):
+        self.x += self.x_vel
+        self.y += self.y_vel
+
+
