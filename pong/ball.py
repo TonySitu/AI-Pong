@@ -13,13 +13,14 @@ def _get_random_angle(min_angle, max_angle, excluded):
 
 class Ball:
     MAX_VEL = 5
+    MAX_ANGLE = 30
     RADIUS = 7
 
     def __init__(self, x, y):
         self.x = self.original_x = x
         self.y = self.original_y = y
 
-        angle = _get_random_angle(-30, 30, [0])
+        angle = _get_random_angle(-self.MAX_ANGLE, self.MAX_ANGLE, [0])
         position = 1 if random.random() < 0.5 else -1
 
         self.x_vel = position * abs(math.cos(angle) * self.MAX_VEL)
