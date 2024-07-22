@@ -1,4 +1,6 @@
 import pygame
+from paddle import Paddle
+from ball import Ball
 import random
 
 
@@ -20,8 +22,21 @@ class GameModel:
         self.window_width = window_width
         self.window_height = window_height
 
+        self.left_paddle = Paddle(10, self.window_height // 2 - Paddle.HEIGHT // 2)
+        self.right_paddle = Paddle(self.window_width - 10 - Paddle.WIDTH, self.window_height // 2 - Paddle.HEIGHT // 2)
+        self.ball = Ball(self.window_width // 2, self.window_height // 2)
+
         self.left_score = 0
         self.right_score = 0
         self.left_hits = 0
         self.right_hits = 0
         self.window = window
+
+    def reset(self):
+        self.ball.reset()
+        self.left_paddle.reset()
+        self.right_paddle.reset()
+        self.left_score = 0
+        self.right_score = 0
+        self.left_hits = 0
+        self.right_hits = 0
