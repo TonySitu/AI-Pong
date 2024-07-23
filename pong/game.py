@@ -32,6 +32,9 @@ class GameModel:
         self.right_hits = 0
         self.window = window
 
+    def draw(self, draw_score=True, draw_hits=False):
+        self.window.fill(self.BLACK)
+
     def reset(self):
         self.ball.reset()
         self.left_paddle.reset()
