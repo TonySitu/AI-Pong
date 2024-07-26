@@ -35,6 +35,18 @@ class GameModel:
     def draw(self, draw_score=True, draw_hits=False):
         self.window.fill(self.BLACK)
 
+        if draw_score:
+            self._draw_score()
+
+        if draw_hits:
+            self._draw_hits()
+
+    def _draw_score(self):
+        pass
+
+    def _draw_hits(self):
+        pass
+
     def reset(self):
         self.ball.reset()
         self.left_paddle.reset()
