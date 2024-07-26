@@ -32,6 +32,13 @@ class GameModel:
         self.right_hits = 0
         self.window = window
 
+    def _draw_divider(self):
+        for i in range(10, self.window_height, self.window_height // 20):
+            if i % 2 == 1:
+                continue
+            pygame.draw.rect(
+                self.window, self.WHITE, (self.window_width // 2 - 5, i, 10, self.window_height // 20))
+
     def _draw_score(self):
         left_score_text = self.SCORE_FONT.render(f"{self.left_score}", 1, self.WHITE)
         right_score_text = self.SCORE_FONT.render(f"{self.right_score}", 1, self.WHITE)
@@ -46,6 +53,8 @@ class GameModel:
 
     def draw(self, draw_score=True, draw_hits=False):
         self.window.fill(self.BLACK)
+
+        self._draw_divider()
 
         if draw_score:
             self._draw_score()
