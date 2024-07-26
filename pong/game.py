@@ -32,6 +32,18 @@ class GameModel:
         self.right_hits = 0
         self.window = window
 
+    def _draw_score(self):
+        left_score_text = self.SCORE_FONT.render(f"{self.left_score}", 1, self.WHITE)
+        right_score_text = self.SCORE_FONT.render(f"{self.right_score}", 1, self.WHITE)
+        self.window.blit(left_score_text, (self.window_width // 4 - left_score_text.get_width() // 2, 20))
+        print(self.window_width // 4 - left_score_text.get_width() // 2)
+        self.window.blit(right_score_text, (self.window_width * (3 / 4) - right_score_text.get_width() // 2, 20))
+        print(self.window_width * (3 / 4) - right_score_text.get_width() // 2)
+
+    def _draw_hits(self):
+        hits_text = self.SCORE_FONT.render(f"{self.left_hits + self.right_hits}", 1, self.RED)
+        self.window.blit(hits_text, (self.window_width // 2 - hits_text.get_width() // 2, 10))
+
     def draw(self, draw_score=True, draw_hits=False):
         self.window.fill(self.BLACK)
 
@@ -40,12 +52,6 @@ class GameModel:
 
         if draw_hits:
             self._draw_hits()
-
-    def _draw_score(self):
-        pass
-
-    def _draw_hits(self):
-        pass
 
     def reset(self):
         self.ball.reset()
