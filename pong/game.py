@@ -62,6 +62,11 @@ class GameModel:
         if draw_hits:
             self._draw_hits()
 
+        for paddle in [self.left_paddle, self.right_paddle]:
+            paddle.draw(self.window)
+
+        self.ball.draw(self.window)
+
     def reset(self):
         self.ball.reset()
         self.left_paddle.reset()
