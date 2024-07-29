@@ -67,6 +67,22 @@ class GameModel:
 
         self.ball.draw(self.window)
 
+    def move_paddle(self, left_paddle=True, up=True):
+        if left_paddle:
+            if up and self.left_paddle.y - Paddle.VEL < 0:
+                return False
+            if not up and self.left_paddle.y + Paddle.VEL > self.window_height:
+                return False
+
+            self.left_paddle.move(up)
+        else:
+            if up and self.right_paddle - Paddle.VEL < 0:
+                return False
+            if not up and self.right_paddle.y + Paddle.VEL > self.window_height:
+                return False
+
+            self.right_paddle.move(up)
+
     def reset(self):
         self.ball.reset()
         self.left_paddle.reset()
