@@ -76,7 +76,7 @@ class GameModel:
 
             self.left_paddle.move(up)
         else:
-            if up and self.right_paddle - Paddle.VEL < 0:
+            if up and self.right_paddle.y - Paddle.VEL < 0:
                 return False
             if not up and self.right_paddle.y + Paddle.VEL > self.window_height:
                 return False
