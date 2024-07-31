@@ -51,6 +51,20 @@ class GameModel:
         hits_text = self.SCORE_FONT.render(f"{self.left_hits + self.right_hits}", 1, self.RED)
         self.window.blit(hits_text, (self.window_width // 2 - hits_text.get_width() // 2, 10))
 
+    def _check_ball_out_of_bounds(self):
+        """
+        Returns True if ball is out of bounds, false otherwise.
+        :return bool:
+        """
+        ball = self.ball
+
+        if ball.x < 0:
+            return True
+        elif ball.x > self.window_width:
+            return True
+
+        return False
+
     def draw(self, draw_score=True, draw_hits=False):
         self.window.fill(self.BLACK)
 
