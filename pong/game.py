@@ -1,7 +1,6 @@
 import pygame
 from paddle import Paddle
 from ball import Ball
-import random
 
 
 class GameState:
@@ -77,19 +76,19 @@ class GameModel:
         if self._check_ball_out_of_bounds():
             self.ball.reset()
 
+        game_state = GameState(self.left_hits, self.right_hits, self.left_score, self.right_score)
+
     def draw(self, draw_score=True, draw_hits=False):
-        self.window.fill(self.BLACK)
-
-        self._draw_divider()
-
         if draw_score:
             self._draw_score()
 
         if draw_hits:
             self._draw_hits()
 
-        for paddle in [self.left_paddle, self.right_paddle]:
-            paddle.draw(self.window)
+        self.window.fill(self.BLACK)
+        self._draw_divider()
+        self.left_paddle.draw(self.window)
+        self.right_paddle.draw(self.window)
 
         self.ball.draw(self.window)
 
