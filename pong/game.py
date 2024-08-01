@@ -59,11 +59,24 @@ class GameModel:
         ball = self.ball
 
         if ball.x < 0:
+            self.right_score += 1
             return True
         elif ball.x > self.window_width:
+            self.left_score += 1
             return True
 
         return False
+
+    def _handle_collisions(self):
+        pass
+
+    def loop(self):
+        self.ball.move()
+        self._handle_collisions()
+
+        if self._check_ball_out_of_bounds():
+            self.ball.reset()
+
 
     def draw(self, draw_score=True, draw_hits=False):
         self.window.fill(self.BLACK)
