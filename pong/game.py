@@ -77,7 +77,6 @@ class GameModel:
         if self._check_ball_out_of_bounds():
             self.ball.reset()
 
-
     def draw(self, draw_score=True, draw_hits=False):
         self.window.fill(self.BLACK)
 
