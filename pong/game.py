@@ -1,6 +1,7 @@
 import pygame
 from paddle import Paddle
 from ball import Ball
+pygame.init()
 
 
 class GameState:
@@ -18,7 +19,6 @@ class GameModel:
     RED = (255, 0, 0)
 
     def __init__(self, window, window_width, window_height):
-        pygame.init()
         self.window_width = window_width
         self.window_height = window_height
 
