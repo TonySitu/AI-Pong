@@ -67,8 +67,52 @@ class GameModel:
 
         return False
 
+    def _check_ball_within_paddle_height(self, paddle):
+        return paddle.y <= self.ball.y <= paddle.y + Paddle.HEIGHT
+
+    def _check_ball_within_paddle_width(self, paddle):
+        return self.ball.RADIUS <= paddle.x + Paddle.WIDTH
+
+    def _check_ball_within_paddle(self, paddle):
+        """
+        Returns True if ball is within bounds of paddle, False otherwise.
+
+        :param paddle that the bounds of the ball are being compared with:
+        :return bool:
+        """
+        return self._check_ball_within_paddle_height(paddle) and self._check_ball_within_paddle_width(paddle)
+
     def _handle_collisions(self):
-        pass
+        ball = self.ball
+        left_paddle = self.left_paddle
+        right_paddle = self.right_paddle
+
+        if ball.y + ball.RADIUS >= self.window_height:
+            ball.y_vel *= -1
+        elif ball.y - ball.RADIUS <= 0:
+            ball.y_vel *= -1
+
+        if ball.x_vel < 0:
+            if self._check_ball_within_paddle(left_paddle):
+                ball.x_vel *= -1
+
+                middle_y = left_paddle.y + Paddle.HEIGHT / 2
+                difference_in_y = middle_y - ball.y
+                reduction_factor = (Paddle.HEIGHT / 2) / ball.MAX_VEL
+                y_vel = difference_in_y / reduction_factor
+                ball.y_vel = -1 * y_vel
+                self.left_hits += 1
+
+        else:
+            if self._check_ball_within_paddle(right_paddle):
+                ball.x_vel *= -1
+
+                middle_y = right_paddle.y + Paddle.HEIGHT / 2
+                difference_in_y = middle_y - ball.y
+                reduction_factor = (Paddle.HEIGHT / 2) / ball.MAX_VEL
+                y_vel = difference_in_y / reduction_factor
+                ball.y_vel = -1 * y_vel
+                self.right_hits += 1
 
     def loop(self):
         self.ball.move()
