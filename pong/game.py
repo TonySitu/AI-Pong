@@ -123,6 +123,8 @@ class GameModel:
 
         game_state = GameState(self.left_hits, self.right_hits, self.left_score, self.right_score)
 
+        return game_state
+
     def draw(self, draw_score=True, draw_hits=False):
         if draw_score:
             self._draw_score()
