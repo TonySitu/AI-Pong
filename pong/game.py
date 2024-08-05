@@ -82,6 +82,13 @@ class GameModel:
         """
         return self._check_ball_within_paddle_height(paddle) and self._check_ball_within_paddle_width(paddle)
 
+    def _find_y_vel(self, paddle):
+        middle_y = paddle.y + Paddle.HEIGHT / 2
+        difference_in_y = middle_y - self.ball.y
+        reduction_factor = (Paddle.HEIGHT / 2) / self.ball.MAX_VEL
+        y_vel = difference_in_y / reduction_factor
+        return y_vel
+
     def _handle_collisions(self):
         ball = self.ball
         left_paddle = self.left_paddle
@@ -92,25 +99,17 @@ class GameModel:
         elif ball.y - ball.RADIUS <= 0:
             ball.y_vel *= -1
 
+        ball.x_vel *= -1
+
         if ball.x_vel < 0:
             if self._check_ball_within_paddle(left_paddle):
-                ball.x_vel *= -1
-
-                middle_y = left_paddle.y + Paddle.HEIGHT / 2
-                difference_in_y = middle_y - ball.y
-                reduction_factor = (Paddle.HEIGHT / 2) / ball.MAX_VEL
-                y_vel = difference_in_y / reduction_factor
+                y_vel = self._find_y_vel(left_paddle)
                 ball.y_vel = -1 * y_vel
                 self.left_hits += 1
 
         else:
             if self._check_ball_within_paddle(right_paddle):
-                ball.x_vel *= -1
-
-                middle_y = right_paddle.y + Paddle.HEIGHT / 2
-                difference_in_y = middle_y - ball.y
-                reduction_factor = (Paddle.HEIGHT / 2) / ball.MAX_VEL
-                y_vel = difference_in_y / reduction_factor
+                y_vel = self._find_y_vel(right_paddle)
                 ball.y_vel = -1 * y_vel
                 self.right_hits += 1
 
