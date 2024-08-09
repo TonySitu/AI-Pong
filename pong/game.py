@@ -56,16 +56,14 @@ class GameModel:
         Returns True if ball is out of bounds, false otherwise.
         :return bool:
         """
-        ball = self.ball
-
-        if ball.x < 0:
+        if self.ball.x < 0:
             self.right_score += 1
-            return True
-        elif ball.x > self.window_width:
+        elif self.ball.x > self.window_width:
             self.left_score += 1
-            return True
+        else:
+            return False
 
-        return False
+        return True
 
     def _check_ball_within_paddle_height(self, paddle):
         return paddle.y <= self.ball.y <= paddle.y + Paddle.HEIGHT
