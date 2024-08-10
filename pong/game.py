@@ -1,6 +1,7 @@
 import pygame
 from paddle import Paddle
 from ball import Ball
+
 pygame.init()
 
 
@@ -137,6 +138,7 @@ class GameModel:
         self.ball.draw(self.window)
 
     def move_paddle(self, left_paddle=True, up=True):
+        # todo change method to take in the actual paddle as the arg
         if left_paddle:
             if up and self.left_paddle.y - Paddle.VEL < 0:
                 return False
@@ -151,6 +153,8 @@ class GameModel:
                 return False
 
             self.right_paddle.move(up)
+
+        return True
 
     def reset(self):
         self.ball.reset()
