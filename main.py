@@ -22,6 +22,14 @@ class PongGame:
 
             game_info = self.game.loop()
 
+            keys = pygame.key.get_pressed()
+            if keys[pygame.K_w]:
+                self.game.move_paddle(left_paddle=True, up=True)
+            elif keys[pygame.K_s]:
+                self.game.move_paddle(left_paddle=True, up=False)
+
+            self.game.draw(draw_score=True)
+            pygame.display.update()
 
 def main():
     pass
