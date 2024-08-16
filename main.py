@@ -50,6 +50,13 @@ class PongGame:
 
         max_hits = 50
 
+        while run:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    return True
+
+            game_info = self.game.loop()
+
 
 def main():
     pass
