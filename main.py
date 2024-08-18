@@ -57,6 +57,11 @@ class PongGame:
 
             game_info = self.game.loop()
 
+            self.move_ai_paddles(net1, net2)
+
+    def move_ai_paddles(self, net1, net2):
+        pass
+
 
 def main():
     pass
