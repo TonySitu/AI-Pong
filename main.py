@@ -59,6 +59,11 @@ class PongGame:
 
             self.move_ai_paddles(net1, net2)
 
+            if draw:
+                self.game.draw(draw_score=False, draw_hits=True)
+
+            pygame.display.update()
+
     def move_ai_paddles(self, net1, net2):
         pass
 
