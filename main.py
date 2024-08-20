@@ -64,7 +64,17 @@ class PongGame:
 
             pygame.display.update()
 
+            duration = time.time() - start_time
+            if game_info.left_score == 1 or game_info.right_score == 1 or game_info.left_hits >= max_hits:
+                self.calculate_fitness(game_info, duration)
+                break
+
+        return False
+
     def move_ai_paddles(self, net1, net2):
+        pass
+
+    def calculate_fitness(self, game_info, duration):
         pass
 
 
