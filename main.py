@@ -72,7 +72,11 @@ class PongGame:
         return False
 
     def move_ai_paddles(self, net1, net2):
-        pass
+        players = [(self.genome1, net1, self.left_paddle, True), (self.genome2, net2, self.right_paddle, False)]
+        for (genome, net, paddle, left) in players:
+            output = net.activate(
+                (paddle.y, abs(paddle.x - self.ball.x), self.ball.y))
+            decision = output.index(max(output))
 
     def calculate_fitness(self, game_info, duration):
         pass
