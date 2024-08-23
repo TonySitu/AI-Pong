@@ -78,6 +78,17 @@ class PongGame:
                 (paddle.y, abs(paddle.x - self.ball.x), self.ball.y))
             decision = output.index(max(output))
 
+            valid = True
+            if decision == 0:  # Don't move
+                genome.fitness -= 0.01  # we want to discourage this
+            elif decision == 1:  # Move up
+                valid = self.game.move_paddle(left, up=True)
+            else:  # Move down
+                valid = self.game.move_paddle(left, up=False)
+
+            if not valid:  # If the movement makes the paddle go off the screen punish the AI
+                genome.fitness -= 1
+
     def calculate_fitness(self, game_info, duration):
         pass
 
