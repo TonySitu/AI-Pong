@@ -90,7 +90,8 @@ class PongGame:
                 genome.fitness -= 1
 
     def calculate_fitness(self, game_info, duration):
-        pass
+        self.genome1.fitness += game_info.left_hits + duration
+        self.genome2.fitness += game_info.right_hits + duration
 
 
 def main():
