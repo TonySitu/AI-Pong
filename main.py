@@ -1,7 +1,7 @@
 import time
-
 import neat
 import pygame
+import pickle
 from pong import game
 from pong import ball
 from pong import paddle
@@ -92,6 +92,23 @@ class PongGame:
     def calculate_fitness(self, game_info, duration):
         self.genome1.fitness += game_info.left_hits + duration
         self.genome2.fitness += game_info.right_hits + duration
+
+
+def eval_genomes():
+    pass
+
+
+def run_neat(config):
+    # p = neat.Checkpointer.restore_checkpoint('neat-checkpoint-85')
+    p = neat.Population(config)
+    p.add_reporter(neat.StdOutReporter(True))
+    stats = neat.StatisticsReporter()
+    p.add_reporter(stats)
+    p.add_reporter(neat.Checkpointer(1))
+
+    winner = p.run(eval_genomes, 50)
+    with open("best.pickle", "wb") as f:
+        pickle.dump(winner, f)
 
 
 def main():
