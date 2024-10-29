@@ -2,9 +2,8 @@ import time
 import neat
 import pygame
 import pickle
+import os
 from pong import game
-from pong import ball
-from pong import paddle
 
 
 class PongGame:
@@ -125,7 +124,14 @@ def run_neat(config):
 
 
 def main():
-    pass
+    local_dir = os.path.dirname(__file__)
+    config_path = os.path.join(local_dir, 'config.txt')
+
+    config = neat.Config(neat.DefaultGenome, neat.DefaultReproduction,
+                         neat.DefaultSpeciesSet, neat.DefaultStagnation,
+                         config_path)
+
+    run_neat(config)
 
 
 if __name__ == "__main__":

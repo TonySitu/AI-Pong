@@ -1,6 +1,6 @@
 import pygame
-import random
 import math
+import random
 
 
 def _get_random_angle(min_angle, max_angle, excluded):
@@ -26,8 +26,8 @@ class Ball:
         self.x_vel = position * abs(math.cos(angle) * self.MAX_VEL)
         self.y_vel = position * abs(math.sin(angle) * self.MAX_VEL)
 
-    def draw(self, window):
-        pygame.draw.circle(window, (255, 255, 255), (self.x, self.y), self.RADIUS)
+    def draw(self, win):
+        pygame.draw.circle(win, (255, 255, 255), (self.x, self.y), self.RADIUS)
 
     def move(self):
         self.x += self.x_vel
@@ -38,5 +38,8 @@ class Ball:
         self.y = self.original_y
 
         angle = _get_random_angle(-30, 30, [0])
-        self.y_vel = self.MAX_VEL * math.sin(angle)
+        x_vel = abs(math.cos(angle) * self.MAX_VEL)
+        y_vel = math.sin(angle) * self.MAX_VEL
+
+        self.y_vel = y_vel
         self.x_vel *= -1
