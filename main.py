@@ -94,8 +94,21 @@ class PongGame:
         self.genome2.fitness += game_info.right_hits + duration
 
 
-def eval_genomes():
-    pass
+def eval_genomes(genomes, config):
+    width, height = 700, 700
+    win = pygame.display.set_mode((width, height))
+    pygame.display.set_caption("PONG")
+
+    for i, (genome1d1, genome1) in enumerate(genomes):
+        print(round(i/len(genomes)) * 100, end='')
+        genome1.fitness = 0
+        for genome_id2, genome2 in genomes[min(i+1, len(genomes) - 1):]:
+            genome2.fitness = 0 if genome2.fitness is None else genome2.fitness
+            pong = PongGame(win, width, height)
+
+            force_quit = pong.train_ai(genome1, genome2, config, draw=True)
+            if force_quit:
+                quit()
 
 
 def run_neat(config):
